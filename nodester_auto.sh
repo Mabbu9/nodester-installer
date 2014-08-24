@@ -64,10 +64,10 @@ case $whoami in
     mkdir /git
 
     cd ~/build/nodester-installer
-    wget -q https://raw.github.com/nodester/nodester-installer/master/dependencies_verify.sh
-    wget -q https://raw.github.com/nodester/nodester-installer/master/env_creation.sh
-    wget -q https://raw.github.com/nodester/nodester-installer/master/package.json
-    wget -q https://raw.github.com/nodester/nodester-installer/master/nodester_official_install_guide.txt
+    wget -q https://raw.github.com/Mabbu9/nodester-installer/master/dependencies_verify.sh
+    wget -q https://raw.github.com/Mabbu9/nodester-installer/master/env_creation.sh
+    wget -q https://raw.github.com/Mabbu9/nodester-installer/master/package.json
+    wget -q https://raw.github.com/Mabbu9/nodester-installer/master/nodester_official_install_guide.txt
     chmod a+x *.sh
 
     echo ${BLDCYA};
@@ -117,7 +117,7 @@ case $whoami in
     echo ${NOCOLR}
     sleep 1;
     #couchdb -k;
-    /etc/init.d/couchdb start
+    couchdb start
     sleep 2;
     if [ `grep -Fc "nodester" /etc/couchdb/local.ini` != "0" ]
     then
@@ -126,17 +126,17 @@ case $whoami in
       echo "";
     else
       # code if not found
-      /etc/init.d/couchdb stop;
+      couchdb stop;
       # FORCE KILL COUCHDB (this gets around the kill -1 issue reported)
       ps -U couchdb -o pid= | xargs kill -9
       sleep 2;
       echo "adding nodester admin account [nodester:password] to CouchDB";
       echo "nodester = password" >> /etc/couchdb/local.ini
       #nano /etc/couchdb/local.ini
-      /etc/init.d/couchdb restart;
+      couchdb restart;
       sleep 2;
     fi
-    /etc/init.d/couchdb status
+    couchdb status
     sleep 1;
 
     echo ${BLDCYA};
@@ -167,7 +167,7 @@ case $whoami in
     echo ${NOCOLR}
     sleep 1;
     cd ~/build
-    git clone https://github.com/alejandromg/n.git
+    git clone https://github.com/Mabbu9/n.git
     cd n && make install
 
     echo ${BLDCYA};
@@ -282,7 +282,7 @@ case $whoami in
     echo ${NOCOLR}
     sleep 1;
     cd /opt
-    wget http://nodester.com/sandbox.tar.gz
+    wget https://raw.github.com/Mabbu9/nodester-installer/master/sandbox.tar.gz
     tar -zxvf sandbox.tar.gz 
     rm sandbox.tar.gz
 
